@@ -1,0 +1,19 @@
+<h1><%= @restaurant.name %></h1>
+<% @reviews.each do |review| %>
+  <h2><%= review.content %></h2>
+  <% (review.rating).times do %>
+    <span><i class="fas fa-star"></i></span>
+  <% end %>
+  <% (5 - review.rating).times do %>
+    <span><i class="far fa-star"></i></span>
+  <% end %>
+<% end %>
+<hr>
+<%= link_to new_restaurant_review_path(@restaurant) do %>
+  <button class='btn btn-primary'><i class='fas fa-plus'></i> Add a review</button>
+<% end %>
+
+<%= link_to restaurants_path do %>
+  <button class='btn btn-primary'><i class='far fa-arrow-alt-circle-left'></i> Back to list</button>
+<% end %>
+

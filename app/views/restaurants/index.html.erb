@@ -1,0 +1,20 @@
+
+<div class="container">
+  <% @restaurants.each do |restaurant| %>
+    <div class="restaurant">
+      <h3><%= link_to restaurant.name, restaurant_path(restaurant) %></h3>
+      <h4><%= restaurant.category %></h4>
+      <p><%= restaurant.address %></p>
+      <p>Tel: <%= restaurant.phone_number %></p>
+      <% @reviews = Review.where(restaurant_id: restaurant.id) %>
+      <% sum = 0 %>
+      <% @reviews.each { |review| sum += review.rating } %>
+      <% @reviews.length > 0 ? avg = sum.to_f / @reviews.length : avg = 0 %>
+      <p>Average rating: <%= avg.round(2) %> / 5</p>
+      <%= image_tag("https://loremflickr.com/300/150/restaurant,front/all?random=#{rand(1..10)}", class: "restaurant-img") %>
+    </div>
+  <% end %>
+  <%= link_to new_restaurant_path do %>
+  <button class='btn btn-primary btn-add'><i class='fas fa-plus'></i> Add a restaurant</button>
+  <% end %>
+</div>
